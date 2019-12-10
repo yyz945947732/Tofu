@@ -4,13 +4,19 @@ class Mock {
   constructor(props, num = null) {
     if (this.__isObject(props)) {
       const absNum = this.__getLegalNum(num);
-      this.__defineProperty('__id', 1);
+      this.__beforeAction();
       if (absNum) this.__arrayMockAction(props, absNum);
       else this.__propsController(props);
-      delete this.__id;
+      this.__afterAction();
     } else {
       throw new TypeError('wrong arguments by Mock. expect key-value object')
     }
+  }
+  __beforeAction() {
+    this.__defineProperty('__id', 1);
+  }
+  __afterAction() {
+    delete this.__id;
   }
   __arrayMockAction(props, num) {
     let i = 0;
@@ -20,7 +26,7 @@ class Mock {
       i++;
       num--;
     }
-    Object.setPrototypeOf(this, Object.create(Array.prototype))
+    Object.setPrototypeOf(Object.getPrototypeOf(this), Object.create(Array.prototype))
   }
   __propsController(props, host = this) {
     for (const i in props) {

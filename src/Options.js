@@ -54,7 +54,7 @@ class Options {
   }
   __toArray(length) {
     this.__defineProperty('length', length);
-    Object.setPrototypeOf(this, Object.create(Array.prototype));
+    Object.setPrototypeOf(Object.getPrototypeOf(this), Object.create(Array.prototype));
   }
   __defineProperty(prop, value) {
     const legal = typeof prop === 'string' && value;
