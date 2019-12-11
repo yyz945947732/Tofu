@@ -120,6 +120,22 @@ class Mock {
       throw new TypeError('wrong arguments by Mock. expect key-value object')
     }
   }
+  add(propName, value, start = false) {
+    const flag = !!start;
+    const strOrNum = arg => typeof arg === 'string' || typeof arg === 'number';
+    const addValue = (oldVal, val) => flag ? `${val}${oldVal}` : `${oldVal}${val}`;
+    if (!strOrNum(propName) || !strOrNum(value)) return
+    if (this instanceof Array) {
+      this.forEach(item => {
+        if (item[propName] && strOrNum(item[propName])) item[propName] = addValue(item[propName], value);
+      })
+    } else {
+      for (const key in this) {
+        if (key === propName && strOrNum(this[key])) this[key] = addValue(this[key], value);
+      }
+    }
+    return this;
+  }
 }
 
 export default Mock
