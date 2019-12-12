@@ -3,8 +3,10 @@ const __getLegalNum = function(num) {
 }
 
 const __errorMsg = function(time, msg, rest) {
-  console.warn(`调用函数第${time}次失败,原因:`, msg);
-  console.warn(rest);
+  console.warn(`
+        调用函数第${time}次失败,原因:${msg}
+        ${rest}
+    `);
 }
 
 const __successMsg = function(time, rest) {
