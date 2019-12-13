@@ -1,4 +1,3 @@
-
 const __propManager = function() {
   let __valuePropertyName = 'value';
   let __labelPropertyName = 'label';
@@ -40,7 +39,7 @@ const __legalStarting = function(starting) {
   return isNumber ? starting : 0;
 }
 
-const __makeLabelValueObj = function(label = 'Unknown', value = -1) {
+const __makeLabelValueObj = function(label = 'Unknown', value = label) {
   return {
     [__getPropName().__labelPropertyName]: String(label),
     [__getPropName().__valuePropertyName]: String(value)
@@ -49,7 +48,7 @@ const __makeLabelValueObj = function(label = 'Unknown', value = -1) {
 
 const __createOptions = function(obj, labels, starting) {
   let value = starting;
-  const valueByType = ind => value instanceof Array ? value[ind] || undefined : value++;
+  const valueByType = ind => value instanceof Array ? value[ind] + '' : value++;
   labels.forEach((item, index) => {
     obj[index] = __makeLabelValueObj(item, valueByType(index));
   })
@@ -93,4 +92,3 @@ class Options {
 }
 
 export default Options
-
