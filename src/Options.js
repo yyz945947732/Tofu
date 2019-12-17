@@ -77,7 +77,7 @@ const __toArray = function(obj, length) {
 }
 
 const __defineProperty = function(obj, prop, value) {
-  const legal = typeof prop === 'string' && value;
+  const legal = typeof prop === 'string' && typeof value !== 'undefined';
   if (legal) Object.defineProperty(obj, prop, { value, writable: true, configurable: true });
 }
 
