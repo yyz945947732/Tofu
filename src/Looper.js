@@ -11,7 +11,8 @@ const __setProps = function(obj, props) {
     const prev = __has(props, i - 1) ? i - 1 : props.length - 1;
     const value = k;
     const next = __has(props, +i + 1) ? +i + 1 : 0;
-    __defineProperty(obj, i, { prev, value, next });
+    const all = __has(obj, 'all') ? obj.all : [];
+    __defineProperty(obj, 'all', all.concat([{ prev, value, next }]));
   }
 }
 
@@ -26,19 +27,18 @@ class Looper {
     if (!props.length) throw new Error('Looper\'s constrctor required at least one argument');
     if (props.length === 1 && props[0] instanceof Array) props = props[0]
     __setProps(this, props);
-    __defineProperty(this, 'length', props.length);
     this.reset()
   }
   reset() {
-    __setNow(this, this[0]);
+    __setNow(this, this.all[0]);
     return this;
   }
   next() {
-    __setNow(this, this[this.now.next]);
+    __setNow(this, this.all[this.now.next]);
     return this;
   }
   prev() {
-    __setNow(this, this[this.now.prev]);
+    __setNow(this, this.all[this.now.prev]);
     return this;
   }
   valueOf() {
@@ -52,14 +52,14 @@ class Looper {
     const _this = this;
     return {
       next() {
-        if (index === _this.length) {
+        if (index === _this.all.length) {
           return {
             value: '',
             done: true
           }
         } else {
           return {
-            value: _this[index++].value,
+            value: _this.all[index++].value,
             done: false
           }
         }
