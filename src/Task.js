@@ -1,27 +1,27 @@
-const __getLegalNum = function(num) {
+const __getLegalNum = function __getLegalNum(num) {
   return typeof num === 'number' ? Math.floor(num < 1 ? 1 : num) : 0;
-}
+};
 
-const __errorMsg = function(time, msg, rest) {
+const __errorMsg = function __errorMsg(time, msg, rest) {
   console.warn(`
         调用函数第${time}次失败,原因:${msg}
         ${rest}
     `);
-}
+};
 
-const __successMsg = function(time, rest) {
+const __successMsg = function __successMsg(time, rest) {
   console.log(`调用函数第${time}次成功! ${rest}`);
-}
+};
 
-const __taskStatusMsg = function(num, end = false) {
-  console.log(`任务${end ? '结束' : '开启'}! 共${num}次任务...`)
-}
+const __taskStatusMsg = function __taskStatusMsg(num, end = false) {
+  console.log(`任务${end ? '结束' : '开启'}! 共${num}次任务...`);
+};
 
-const __getRest = function(now, end) {
+const __getRest = function __getRest(now, end) {
   return `剩余${end - now}次...`;
-}
+};
 
-const __runTask = function(fn, num, delay, log) {
+const __runTask = function __runTask(fn, num, delay, log) {
   const end = num;
   let now = 1;
   if (log) __taskStatusMsg(num);
@@ -41,7 +41,7 @@ const __runTask = function(fn, num, delay, log) {
     }
   }, delay);
   return timer;
-}
+};
 
 class Task {
   constructor(fn, num = 1, delay = 9000, openLog = true) {
@@ -51,15 +51,16 @@ class Task {
     if (fn && typeof fn === 'function') {
       this.task = {
         action: fn,
-        id: __runTask(fn, this.taskNum, this.taskDelay, this.openLog)
-      }
+        id: __runTask(fn, this.taskNum, this.taskDelay, this.openLog),
+      };
     } else {
       throw new TypeError('wrong argument by Task.the first argument expect function');
     }
   }
+
   stop() {
     if (this.task && this.task.id) clearInterval(this.task.id);
   }
 }
 
-export default Task
+export default Task;

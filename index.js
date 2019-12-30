@@ -7,5 +7,5 @@ export default {
   Mock,
   Options,
   Task,
-  Looper
-}
+  Looper,
+};
