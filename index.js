@@ -1,7 +1,7 @@
-import Mock from './src/Mock';
-import Options from './src/Options';
-import Task from './src/Task';
-import Looper from './src/Looper';
+import Mock from './src/core/Mock';
+import Options from './src/core/Options';
+import Task from './src/core/Task';
+import Looper from './src/core/Looper';
 
 export default {
   Mock,
