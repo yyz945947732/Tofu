@@ -12,32 +12,6 @@
     <script>
         (function () {
             const { Mock, Options, Task, Looper, Meteor } = Tofu
-            /***
-             * 
-             * @params (...props:any)
-             * 任意参数,任意类型,将由参数每一项组成环形结构的数据
-             * 
-             * @methods 
-             * 1.reset():重置,将指针移到环的第一项
-             * 2.next():将指针移到下一位
-             * 3.prev():将指针移到上一位
-             * 
-             * ***/
-            const { Looper } = Tofu
-            //构造示例
-            const autoAnswerLoop = new Looper('emmm...', 'is ok', 'Hi')
-
-            //原型方法 next() 示例
-            autoAnswerLoop.next()
-
-            //原型方法 reset() 示例
-            autoAnswerLoop.reset()
-
-            //原型方法 prev() 示例
-            autoAnswerLoop.prev()
-
-            const lx = new Meteor('Meteor')
-            console.log(lx)
         })()
     </script>
 </body>

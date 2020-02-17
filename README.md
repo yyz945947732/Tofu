@@ -118,3 +118,37 @@ autoAnswerLoop.reset()
 //原型方法 prev() 示例
 autoAnswerLoop.prev()
 ```
+## Meteor  
+###### 创建一个即将消逝的数据
+```javascript
+/***
+* 
+* @params (value:any,delay?:Number,fn?:Function)
+* 1.即将消逝的数据
+* 2.数据停留时间(可选),默认5秒
+* 3.数据消逝后执行的回调(可选,回调参数中包含具体信息),默认为空函数
+* 
+* @methods 
+* 1.wish(fn:Function):如果数据还没有消逝,则调用传入的回调函数(fn),并统计回调成功的次数
+* 
+* ***/
+
+const { Meteor } = Tofu
+
+//构造示例
+const dataWillDie = new Meteor(
+    { name: 'Met' }, 
+    9000, 
+    (res) => { 
+        if(res.isCrashed){
+            console.log(`
+            消逝的数据是${JSON.stringify(res.crashedValue)}
+            wish成功调用了${res.meteor.wishComeTrueTime}次
+            `);
+        }
+    }
+)
+
+//原型方法 wish() 示例
+dataWillDie.wish(val => console.log(`Hi, ${val.name}`))
+```
