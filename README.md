@@ -22,6 +22,7 @@ ES6模块化的提高前端开发效率的JS工具库 (持续开发中),
 * @params (props:Object,num?:Number)
 * 1.字段名以及字段对应值的长度组成的键值对,以及可选值('img','address','id'),对应值为数组即随机抽取数组中其中一位,可传入深层对象
 * 2.生成个数(可选),大于一将返回数组格式数据
+*
 * @methods 
 * 1.add(propName:String,value:Any,start?:Boolean):给对应字段(propName)的首部或末尾(start?)添加指定字段(value)
 * 
@@ -74,6 +75,7 @@ const signStatus = new Options(['未签到', '已签到'], 1, { label: 'key', va
 * 2.方法期望执行次数(可选),默认1次
 * 3.每次执行任务的等待时间(可选),默认9秒
 * 4.是否打印任务日志(可选),默认开启
+*
 * @methods 
 * 1.stop():直接停止任务
 * 
@@ -151,4 +153,45 @@ const dataWillDie = new Meteor(
 
 //原型方法 wish() 示例
 dataWillDie.wish(val => console.log(`Hi, ${val.name}`))
+```
+## Black8  
+###### 创建一个很容易报错的数据
+```javascript
+/***
+* 
+* @params (obj?:any,deep?:Boolean)
+* 1.数据源(可选),任意类型,推荐为键值对,如果不是键值对将自动匹配为value属性的值
+* 2.是否进行深度构建(可选),默认为关闭,开启后所有的子对象都会转化为Black8的实例
+* 
+* @methods 
+* 1.boom(msg?:String):直接抛出错误信息为(msg)的异常,并对错误信息进行统计
+* 2.getErrorInfo(reason?:String):返回对应原因(reason)的错误统计信息,无参数时返回所有统计信息
+* 
+* ***/
+
+const { Black8 } = Tofu
+
+//构造示例
+const userData = new Black8(
+    {
+        name: 'tony',
+        id: 1,
+        info: {
+            grade: 7,
+            sex: 'male',
+            borther: {
+                name: 'jake',
+                grade: 6
+            }
+        }
+    },
+    true
+)
+//或
+const dataBetterJustRead = new Black8('you better use me carefully')
+
+//原型方法 boom() 示例
+userData.boom('grade should bigger than 1')
+//原型方法 getErrorInfo() 示例
+console.table(userData.getErrorInfo())
 ```
