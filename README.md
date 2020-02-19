@@ -195,3 +195,25 @@ userData.boom('grade should bigger than 1')
 //原型方法 getErrorInfo() 示例
 console.table(userData.getErrorInfo())
 ```
+## Chaos  
+###### 创建一片混沌
+```javascript
+/***
+* 
+* @params (length?:Number)
+* 1.长度(可选),默认为1,将返回对应长度的混乱的可遍历数组
+* 
+* @methods 
+* 1.evolution(time?:Number):将数组中所有数据进行(time,默认为1)次的随机类型转化或序列化处理
+* 
+* ***/
+
+const { Chaos } = Tofu
+
+//构建示例
+const chaos = new Chaos(100)
+
+//原型方法 evolution() 示例
+chaos.evolution(1000)
+
+```
