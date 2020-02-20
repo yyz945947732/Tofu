@@ -227,11 +227,11 @@ chaos.evolution(1000)
 ```javascript
 /***
 * 
-* @params (obj?:Object,rules?:Object)
+* @params (obj?:Object,rules?(target,smart,special):Object)
 * 1.数据源(可选),要清理的数据,会对对象属性以及子对象都进行深度清理,
-* 2.清理规则(可选,target?:any,smart?:Boolean,special?:Object),
+* 2.清理规则(可选,{ target?:any,smart?:Boolean,special?:Object }),
 *       target:每个属性被清理后的值,默认为undefined
-*       smart:是否开启只能模式,即按照属性类型清理为合适的值,默认关闭
+*       smart:是否开启智能模式,即按照属性类型清理为合适的值,默认关闭
 *       special:特殊处理组,如数据源中包含对应属性,将按照键值对的值赋给对应属性,默认空对象
 * 
 * @methods 
