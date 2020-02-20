@@ -35,9 +35,9 @@ const __legalLabels = function __legalLabels(labels) {
 };
 
 const __legalStarting = function __legalStarting(starting) {
-  if (starting instanceof Array) return starting;
+  if (starting instanceof Array || starting === null) return starting;
   const number = Number(starting);
-  const isNumber = typeof number === 'number' && !isNaN(number);
+  const isNumber = typeof number === 'number' && !Number.isNaN(number);
   return isNumber ? starting : 0;
 };
 
@@ -52,7 +52,7 @@ const __createOptions = function __createOptions(obj, labels, starting) {
   let value = starting;
   const valueByType = (ind) => (value instanceof Array ? `${value[ind]}` : value++);
   labels.forEach((item, index) => {
-    obj[index] = __makeLabelValueObj(item, valueByType(index));
+    obj[index] = __makeLabelValueObj(item, value !== null ? valueByType(index) : item);
   });
   return labels.length;
 };
