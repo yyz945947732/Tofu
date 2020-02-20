@@ -1,17 +1,22 @@
 
 # Tofu
 ES6模块化的提高前端开发效率的JS工具库 (持续开发中),
+```html
+<!-- 将dist目录下的Tofu.js放入你的相应工程下,在需要的页面引入 -->
+```
+```javascript
+/***使用示例***/
+
+//Node环境
+const { Mock } = Tofu
+
+//浏览器环境
+const { Mock } = Tofu.default
+```
 现包含以下工具 :
 
 
 ------------
-
-
-------------
-
-
-------------
-
 
 
 ## Mock  
@@ -215,5 +220,54 @@ const chaos = new Chaos(100)
 
 //原型方法 evolution() 示例
 chaos.evolution(1000)
+
+```
+## Cleaner  
+###### 快速清理一份数据
+```javascript
+/***
+* 
+* @params (obj?:Object,rules?:Object)
+* 1.数据源(可选),要清理的数据,会对对象属性以及子对象都进行深度清理,
+* 2.清理规则(可选,target?:any,smart?:Boolean,special?:Object),
+*       target:每个属性被清理后的值,默认为undefined
+*       smart:是否开启只能模式,即按照属性类型清理为合适的值,默认关闭
+*       special:特殊处理组,如数据源中包含对应属性,将按照键值对的值赋给对应属性,默认空对象
+* 
+* @methods 
+* 1.clean():按照规则(构造时传入的rules)执行一次清理(构造函数创建也会自动执行一次)
+* 2.setCleanRules(rules?:Object):将实例的规则覆盖为对应的规则(传入的属性才覆盖)
+* 
+* ***/
+
+const Cleaner = { Tofu }
+
+//构造示例
+const userForm = new Cleaner(
+    {
+        name: 'tony',
+        age: 12,
+        detail: {
+            sex: 'male',
+            like: ['singing', 'swimming'],
+            borther: {
+                age: 10,
+                name: 'Jake'
+            }
+        }
+    },
+    {
+        target: null,
+        special: { age: 100 }
+    }
+)
+//或
+const initData = new Cleaner();
+
+//原型方法 setCleanRules() 示例
+userForm.setCleanRules({ smart: true, special: { age: 13 } })
+
+//原型方法 clean() 示例
+userForm.clean();
 
 ```

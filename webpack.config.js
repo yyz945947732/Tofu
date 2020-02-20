@@ -5,7 +5,13 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'Tofu.js',
-    libraryTarget: 'commonjs2',
+    libraryTarget: 'umd',
+    globalObject: 'this',
+    library: 'Tofu',
+  },
+  devServer: {
+    compress: true,
+    port: 9000,
   },
   module: {
     rules: [

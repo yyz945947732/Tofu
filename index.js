@@ -5,6 +5,7 @@ import Looper from './src/core/Looper';
 import Meteor from './src/core/Meteor';
 import Black8 from './src/core/Black8';
 import Chaos from './src/core/Chaos';
+import Cleaner from './src/core/Cleaner';
 
 const Tofu = {
   Mock,
@@ -14,6 +15,7 @@ const Tofu = {
   Meteor,
   Black8,
   Chaos,
+  Cleaner,
 };
 
 if (window && !window.Tofu) {
