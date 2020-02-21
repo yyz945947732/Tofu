@@ -11,10 +11,16 @@ const random = (arr) => (arr instanceof Array ? arr[Math.floor(Math.random() * a
 
 const has = (obj, prop) => (typeof Reflect !== 'undefined' && Reflect.has ? Reflect.has(obj, prop) : obj[prop]);
 
+const toArray = function toArray(obj, length) {
+  defineProperty(obj, 'length', length);
+  Object.setPrototypeOf(Object.getPrototypeOf(obj), Object.create(Array.prototype));
+};
+
 export default {
   getLegalNum,
   defineProperty,
   isObject,
   random,
   has,
+  toArray,
 };

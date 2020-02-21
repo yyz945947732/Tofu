@@ -56,9 +56,9 @@ mockArticles.add('content', '这位作者说:', true)
 ```javascript
 /***
 * 
-* @params (labels:Array | String,starting?:Number,propName?:Object)
+* @params (labels:Array | String,starting?:Number | Array | Null,propName?:Object)
 * 1.每一项的标签名
-* 2.自增值的起始值(可选),默认从0开始
+* 2.自增值的起始值(可选),默认从0开始,如传入null则其值等于其标签名,如传入数组则其值为数组对应项
 * 3.统一的键值对字段名(可选),默认为'label -> value'需传入包含'value'和'label'的对象
 * 
 * ***/
@@ -269,5 +269,47 @@ userForm.setCleanRules({ smart: true, special: { age: 13 } })
 
 //原型方法 clean() 示例
 userForm.clean();
+
+```
+## Snapshot  
+###### 创建一个保存某个数据的快照的容器
+```javascript
+/***
+* 
+* @params (obj:Object | Array,...props?时间点(1000=1秒))
+* 1.数据对象,快照的参照对象
+* 2.时间点(可选,可直接传入一个数组,或参数依次传入),将在每个时间点拍下一份快照并保存在容器中
+* 
+* @methods 
+* 1.kaca(sign?:any,once?:Boolean):直接拍下一份标识为sign(默认为'default sign')的快照,
+*   如果once为true则此标识的快照只保存一次
+* 2.get(sign?:any):获取标识为sign(默认为'default sign')的快照
+* 3.timeTravel(sign?:any):将快照的参照对象回溯到对应标识(默认为'default sign')的状态
+* 
+* ***/
+
+const { Snapshot } = Tofu
+
+//构造示例
+let data = { num: 0 };         
+const dataStates = new Snapshot(data);
+//或
+let arr = [1, 2, 3];
+const arrStates = new Snapshot(arr, 1000, 2000, 3000, 5000, 6000);
+
+//原型方法 kaca() 示例
+dataStates.kaca('init data');
+
+data.num++;
+
+dataStates.kaca('num++');
+
+//原型方法 get() 示例 
+console.log(dataStates.get('init data'));
+
+//原型方法 timeTravel() 示例 
+data.num += 5;
+dataStates.timeTravel('num++');
+console.log(data);
 
 ```

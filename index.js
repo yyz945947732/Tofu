@@ -6,6 +6,7 @@ import Meteor from './src/core/Meteor';
 import Black8 from './src/core/Black8';
 import Chaos from './src/core/Chaos';
 import Cleaner from './src/core/Cleaner';
+import Snapshot from './src/core/Snapshot';
 
 const Tofu = {
   Mock,
@@ -16,6 +17,7 @@ const Tofu = {
   Black8,
   Chaos,
   Cleaner,
+  Snapshot,
 };
 
 if (window && !window.Tofu) {
