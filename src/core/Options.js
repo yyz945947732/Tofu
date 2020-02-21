@@ -71,7 +71,7 @@ const __definePropName = function __definePropName(propName) {
 
 const __toArray = function __toArray(obj, length) {
   utils.defineProperty(obj, 'length', length);
-  Object.setPrototypeOf(Object.getPrototypeOf(obj), Object.create(Array.prototype));
+  Object.setPrototypeOf(obj, Array.prototype);
 };
 
 class Options {
